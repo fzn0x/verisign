@@ -1,0 +1,4 @@
+# Copy to .dev.vars for `wrangler dev`. Never commit .dev.vars.
+OWNER_PASSWORD=change-me-to-12-plus-chars
+# Leave PUBLIC_ORIGIN empty locally so QR codes point at localhost.
+PUBLIC_ORIGIN=
