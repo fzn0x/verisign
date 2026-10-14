@@ -130,6 +130,9 @@
   position: absolute;
   cursor: grab;
   touch-action: none;
+  /* A drag would otherwise select the caption text. */
+  -webkit-user-select: none;
+  user-select: none;
   outline: 1px dashed rgb(17 17 17 / 0.45);
   outline-offset: 3px;
   border-radius: 1px;
