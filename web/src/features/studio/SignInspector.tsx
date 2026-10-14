@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { CopyButton } from "../../components/CopyButton";
 import { TextField } from "../../components/Field";
 import { HashRegister } from "../../components/HashRegister";
-import { StatusLabel, StatusMark } from "../../components/StatusMark";
+import { StatusMark } from "../../components/StatusMark";
 import { formatBytes, plural } from "../../lib/format";
 import { PT_PER_MM, STAMP_MAX_MM, STAMP_MIN_MM } from "../../lib/stamp";
 import type { Issuer } from "../../lib/types";
@@ -222,8 +222,8 @@ function Issued() {
   return (
     <div className={styles.inspector}>
       <section className={styles.done} aria-live="polite">
-        <StatusLabel kind="issued" />
         <h2 className={styles.doneTitle}>
+          <StatusMark kind="issued" size={20} />
           Issued <span className="mono">{doc.serial}</span>
         </h2>
         <p className={styles.doneText}>

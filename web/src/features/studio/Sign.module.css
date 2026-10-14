@@ -156,7 +156,8 @@
 }
 
 .stamp[data-issued] {
-  outline: 2px solid var(--accent);
+  outline: 1.5px solid var(--ink);
+  outline-offset: 2px;
   box-shadow: none;
 }
 
@@ -507,6 +508,9 @@
 }
 
 .doneTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
   font-size: var(--t-xl);
 }
 
