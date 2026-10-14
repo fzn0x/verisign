@@ -7,10 +7,12 @@ import { mkdirSync, statSync } from "node:fs";
 
 const workerOnly = process.argv.includes("--worker");
 
+// pnpm is a .cmd shim on Windows and needs a shell; go must not get one,
+// or the shell splits the quoted -ldflags value.
 function run(cmd, args, env = {}) {
   const result = spawnSync(cmd, args, {
     stdio: "inherit",
-    shell: process.platform === "win32",
+    shell: process.platform === "win32" && cmd === "pnpm",
     env: { ...process.env, ...env },
   });
   if (result.status !== 0) {
