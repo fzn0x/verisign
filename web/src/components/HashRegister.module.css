@@ -1,0 +1,126 @@
+.register {
+  --step: 70ms;
+  display: grid;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 0.66rem + 0.25vw, 0.8125rem);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+.head,
+.row {
+  display: grid;
+  grid-template-columns: 1rem auto;
+  column-gap: var(--s-3);
+  align-items: center;
+  justify-content: start;
+}
+
+.register[data-paired] .head,
+.register[data-paired] .row {
+  grid-template-columns: 1rem auto auto;
+  column-gap: clamp(0.6rem, 0.3rem + 1.5vw, 1.5rem);
+}
+
+.head {
+  font-family: var(--font-sans);
+  font-size: var(--t-xs);
+  font-weight: 560;
+  color: var(--ink-3);
+}
+
+.rows {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.group {
+  position: relative;
+  color: var(--ink-2);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.tick {
+  width: 1rem;
+  height: 1rem;
+  overflow: visible;
+}
+
+.tick circle {
+  fill: none;
+  stroke: var(--n-3);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+}
+
+/* Checking: the rows wait in grey, breathing in sequence. */
+.register[data-result="checking"] .tick circle {
+  stroke-dasharray: 0.18 0.07;
+  animation: wait 1.2s linear infinite;
+}
+
+.register[data-result="checking"] .group {
+  color: var(--n-4);
+}
+
+@keyframes wait {
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+
+/* Match: each group ticks to the accent ring in turn. */
+.register[data-result="match"] .tick circle {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  animation: draw 420ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--step));
+}
+
+.register[data-result="match"] .group {
+  color: var(--ink);
+  animation: settle 420ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--step));
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+    stroke: var(--n-3);
+  }
+}
+
+@keyframes settle {
+  from {
+    color: var(--n-4);
+  }
+}
+
+/* Mismatch: the supplied string stands alone, each group struck. */
+.register[data-result="mismatch"] .tick circle {
+  stroke: var(--danger);
+  stroke-dasharray: 0.08 0.05;
+}
+
+.register[data-result="mismatch"] .yours::after {
+  content: "";
+  position: absolute;
+  inset: 50% -0.15em auto;
+  height: 1.5px;
+  background: var(--danger);
+  transform-origin: left center;
+  animation: strike 360ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--step));
+}
+
+@keyframes strike {
+  from {
+    transform: scaleX(0);
+  }
+}
