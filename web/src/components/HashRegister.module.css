@@ -50,13 +50,14 @@
   overflow: visible;
 }
 
+/* Rings start at 12 o'clock; a settled ring carries no dash, so it closes. */
 .tick circle {
   fill: none;
   stroke: var(--n-3);
   stroke-width: 2;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
+  transform-box: fill-box;
   transform-origin: center;
+  transform: rotate(-90deg);
 }
 
 /* Checking: the rows wait in grey, breathing in sequence. */
@@ -79,7 +80,7 @@
 .register[data-result="match"] .tick circle {
   stroke: var(--accent);
   stroke-width: 2.5;
-  animation: draw 420ms var(--ease-out) both;
+  animation: draw 420ms var(--ease-out) backwards;
   animation-delay: calc(var(--i) * var(--step));
 }
 
@@ -91,8 +92,13 @@
 
 @keyframes draw {
   from {
+    stroke-dasharray: 1 1;
     stroke-dashoffset: 1;
     stroke: var(--n-3);
+  }
+  to {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 0;
   }
 }
 
