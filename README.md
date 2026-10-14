@@ -6,6 +6,8 @@ A small, self-hosted service for signing PDFs with a verification QR code and le
 - **Verify:** scanning the QR opens a page on your domain that shows who issued the document, when, and whether it has been revoked.
 - **Check integrity:** on that page, anyone can drop their copy of the PDF, or paste its SHA-512 fingerprint, to confirm it is byte-for-byte the file that was issued.
 
+![Signing a sample letter, then checking the downloaded file on its verification page](docs/demo.gif)
+
 ## How it works
 
 1. The owner signs in and chooses a PDF. The file is opened **in the browser** and never uploaded.
