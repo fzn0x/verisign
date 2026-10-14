@@ -2,7 +2,10 @@ module github.com/fzn0x/verisign
 
 go 1.27.2
 
-require modernc.org/sqlite v1.60.1
+require (
+	github.com/syumai/workers-go v0.36.0
+	modernc.org/sqlite v1.60.1
+)
 
 require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
