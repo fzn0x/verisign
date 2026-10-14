@@ -7,10 +7,11 @@
   "packageManager": "pnpm@10.29.3",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "build:web": "pnpm --dir web build",
     "build:worker": "node scripts/build.mjs --worker",
-    "dev": "wrangler dev",
+    "dev": "pnpm build:web && wrangler dev",
     "dev:web": "pnpm --dir web dev",
-    "deploy": "wrangler deploy",
+    "deploy": "pnpm build:web && wrangler deploy",
     "db:migrate": "wrangler d1 migrations apply verisign --local",
     "db:migrate:remote": "wrangler d1 migrations apply verisign --remote",
     "test": "go test ./... && pnpm --dir web test"

@@ -12,8 +12,11 @@ routes = [
   { pattern = "verisign.example.com", custom_domain = true },
 ]
 
+# Wrangler only compiles the Go Worker; the web app is built beforehand by
+# `pnpm dev` / `pnpm deploy`, because Wrangler indexes the assets directory
+# before running this command.
 [build]
-command = "node scripts/build.mjs"
+command = "node scripts/build.mjs --worker"
 watch_dir = ["cmd", "internal"]
 
 [assets]
