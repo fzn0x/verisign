@@ -20,6 +20,22 @@ What a successful check proves: the record is served from the issuer's domain, a
 
 Stamping rewrites the PDF, so any existing digital signature inside the file will no longer validate. The studio warns when a file already carries one.
 
+## Screenshots
+
+The studio, where the owner places the stamp and issues the document:
+
+![The signing studio with a QR stamp placed on a sample letter](docs/screenshots/sign.png)
+
+The verification page after a visitor drops their copy of the file:
+
+![The verification page showing a matching SHA-512 fingerprint](docs/screenshots/verify.png)
+
+The register of everything issued, where documents can be revoked:
+
+![The register listing issued and revoked documents](docs/screenshots/register.png)
+
+The documents and names shown are fictional samples.
+
 ## Stack
 
 | Part | Technology |
