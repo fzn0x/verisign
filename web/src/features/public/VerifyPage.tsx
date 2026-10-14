@@ -61,6 +61,7 @@ export function VerifyPage() {
         <aside className={styles.aside}>
           <IntegrityPanel doc={doc} initialDigest={handoff?.sha512} initialFileName={handoff?.fileName} />
         </aside>
+        <RecordLink doc={doc} />
         <WhatThisProves doc={doc} />
       </div>
     </div>
@@ -83,13 +84,21 @@ function StatusSentence({ doc }: { doc: PublicDocument }) {
 }
 
 function ProofRow({ doc }: { doc: PublicDocument }) {
+  const here = window.location.host;
+  const home = hostOf(doc.verifyUrl);
   return (
     <ul className={styles.proof}>
-      <li>
+      <li data-warning={here !== home || undefined}>
         <Globe size={15} aria-hidden />
-        <span>
-          Served from <strong>{hostOf(doc.verifyUrl)}</strong>
-        </span>
+        {here === home ? (
+          <span>
+            Served from <strong>{here}</strong>
+          </span>
+        ) : (
+          <span>
+            This record belongs at <strong>{home}</strong>; you are on <strong>{here}</strong>
+          </span>
+        )}
       </li>
       <li>
         <CalendarDays size={15} aria-hidden />
@@ -148,6 +157,16 @@ function RecordFields({ doc }: { doc: PublicDocument }) {
           <dt>Issued</dt>
           <dd>{formatDateTime(doc.issuedAt)}</dd>
         </div>
+      </dl>
+    </section>
+  );
+}
+
+/** The file facts and link, which follow the integrity check on phones. */
+function RecordLink({ doc }: { doc: PublicDocument }) {
+  return (
+    <section className={styles.morePanel} aria-label="Signed file">
+      <dl className={styles.fields}>
         <div>
           <dt>Signed file</dt>
           <dd>
@@ -177,8 +196,8 @@ function WhatThisProves({ doc }: { doc: PublicDocument }) {
         <div className={styles.claim}>
           <p className={styles.claimHead}>The record comes from {org}.</p>
           <p>
-            It is served from <span className="mono">{hostOf(doc.verifyUrl)}</span>, a domain {org} controls. Check the
-            address bar shows exactly that.
+            Its home is <span className="mono">{hostOf(doc.verifyUrl)}</span>, a domain {org} controls. Check the address
+            bar shows exactly that.
           </p>
         </div>
         <div className={styles.claim}>

@@ -5,7 +5,7 @@
   padding-inline: var(--gutter);
 }
 
-/* Mobile order: claim, record, check, then the explanation. */
+/* Mobile order: claim, record, check, file facts, then the explanation. */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -13,8 +13,9 @@
     "head"
     "fields"
     "aside"
+    "more"
     "proves";
-  gap: var(--s-8);
+  gap: var(--s-6);
 }
 
 .head {
@@ -27,6 +28,10 @@
   grid-area: fields;
 }
 
+.morePanel {
+  grid-area: more;
+}
+
 .aside {
   grid-area: aside;
 }
@@ -35,16 +40,33 @@
   grid-area: proves;
 }
 
+/* Desktop: the record reads as one panel beside the sticky check. */
 @media (min-width: 64rem) {
   .layout {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     grid-template-areas:
       "head aside"
       "fields aside"
+      "more aside"
       "proves aside";
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
     column-gap: clamp(2.5rem, 5vw, 4.5rem);
-    row-gap: var(--s-10);
+    row-gap: 0;
+  }
+
+  .head {
+    padding-bottom: var(--s-10);
+  }
+
+  .fieldsPanel.fieldsPanel {
+    border-bottom: 0;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+  }
+
+  .morePanel.morePanel {
+    border-top: 1px solid var(--line);
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
+    margin-bottom: var(--s-10);
   }
 
   .aside {
@@ -60,18 +82,30 @@
   gap: var(--s-3);
 }
 
+/* The mark sits inline at cap height; on desktop it hangs in the gutter so
+   the sentence, title and proof row share one left edge. */
 .status {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
   font-size: var(--t-2xl);
   font-weight: 680;
   letter-spacing: -0.03em;
 }
 
 .status svg {
-  width: 0.72em;
-  height: 0.72em;
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.4em;
+  vertical-align: 0;
+}
+
+@media (min-width: 64rem) {
+  .status {
+    font-size: var(--t-3xl);
+  }
+
+  .status svg {
+    margin-left: -1.1em;
+  }
 }
 
 .status[data-status="pending"] {
@@ -112,6 +146,12 @@
   color: var(--ink);
 }
 
+.proof li[data-warning],
+.proof li[data-warning] svg,
+.proof li[data-warning] strong {
+  color: var(--danger);
+}
+
 .revocation {
   display: grid;
   gap: var(--s-2);
@@ -132,7 +172,8 @@
 }
 
 /* Record fields */
-.fieldsPanel {
+.fieldsPanel,
+.morePanel {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -179,7 +220,15 @@
 
 @media (max-width: 34rem) {
   .fields > div {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(6.5rem, 2fr) 5fr;
+    gap: var(--s-1) var(--s-3);
+    padding: var(--s-3) var(--s-4);
+    font-size: var(--t-sm);
+  }
+
+  .fields dt {
+    font-size: var(--t-xs);
+    padding-top: 0.15em;
   }
 }
 
