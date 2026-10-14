@@ -1,0 +1,132 @@
+.page {
+  width: 100%;
+  max-width: var(--content);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: grid;
+  gap: clamp(var(--s-10), 6vw, var(--s-16));
+}
+
+.intro {
+  display: grid;
+  gap: var(--s-4);
+  max-width: 46rem;
+}
+
+.title {
+  font-size: var(--t-3xl);
+  font-weight: 680;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.lead {
+  font-size: var(--t-lg);
+  color: var(--ink-2);
+  max-width: 38rem;
+}
+
+.tools {
+  display: grid;
+  gap: var(--s-6);
+  align-items: start;
+}
+
+@media (min-width: 56rem) {
+  .tools {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.tool {
+  display: grid;
+  gap: var(--s-5);
+  padding: var(--s-6);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-panel);
+}
+
+@media (max-width: 30rem) {
+  .tool {
+    padding: var(--s-5) var(--s-4);
+  }
+}
+
+.toolHead {
+  display: grid;
+  gap: var(--s-1);
+}
+
+.toolTitle {
+  font-size: var(--t-xl);
+}
+
+.toolLead {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.serialForm {
+  display: grid;
+  gap: var(--s-4);
+  justify-items: start;
+}
+
+.serialForm > div {
+  width: 100%;
+}
+
+.progress {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.result {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+
+.resultText {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+
+.error {
+  font-size: var(--t-sm);
+  color: var(--danger);
+}
+
+.howTitle {
+  font-size: var(--t-lg);
+  margin-bottom: var(--s-4);
+}
+
+.claims {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.claim {
+  display: grid;
+  gap: var(--s-1) var(--s-8);
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+}
+
+.claimHead {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (min-width: 48rem) {
+  .claim {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: baseline;
+  }
+}
