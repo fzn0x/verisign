@@ -153,24 +153,33 @@ export function RegisterPage() {
                     <StatusLabel kind={doc.status} />
                   </td>
                   <td className={styles.actions}>
-                    {doc.status !== "pending" ? (
-                      <>
-                        <CopyButton value={doc.verifyUrl} label="Link" copiedMessage={`Link to ${doc.serial} copied`} />
-                        <a className={styles.iconLink} href={`/v/${doc.id}`} target="_blank" rel="noopener" aria-label={`Open the verification page for ${doc.serial}`}>
-                          <ArrowUpRight size={16} aria-hidden />
-                        </a>
-                      </>
-                    ) : null}
-                    {doc.status === "issued" ? (
-                      <Button size="sm" variant="quiet" onClick={() => setRevoking(doc)}>
-                        Revoke
-                      </Button>
-                    ) : null}
-                    {doc.status === "pending" ? (
-                      <Button size="sm" variant="quiet" onClick={() => setDiscarding(doc)}>
-                        Discard
-                      </Button>
-                    ) : null}
+                    {/* Three fixed slots keep each action in the same column on every row. */}
+                    <div className={styles.slots}>
+                      {doc.status !== "pending" ? (
+                        <>
+                          <CopyButton value={doc.verifyUrl} label="Link" copiedMessage={`Link to ${doc.serial} copied`} />
+                          <a className={styles.iconLink} href={`/v/${doc.id}`} target="_blank" rel="noopener" aria-label={`Open the verification page for ${doc.serial}`}>
+                            <ArrowUpRight size={16} aria-hidden />
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          <span />
+                          <span />
+                        </>
+                      )}
+                      {doc.status === "issued" ? (
+                        <Button size="sm" variant="quiet" onClick={() => setRevoking(doc)}>
+                          Revoke
+                        </Button>
+                      ) : doc.status === "pending" ? (
+                        <Button size="sm" variant="quiet" onClick={() => setDiscarding(doc)}>
+                          Discard
+                        </Button>
+                      ) : (
+                        <span />
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}

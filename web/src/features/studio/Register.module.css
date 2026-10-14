@@ -172,8 +172,11 @@
   text-align: right;
 }
 
-.actions > * {
-  vertical-align: middle;
+.slots {
+  display: inline-grid;
+  grid-template-columns: 4.5rem 2.25rem 5rem;
+  align-items: center;
+  justify-items: start;
 }
 
 .iconLink {
