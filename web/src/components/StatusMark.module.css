@@ -1,0 +1,56 @@
+.mark {
+  flex: none;
+  overflow: visible;
+}
+
+.ring {
+  fill: none;
+  stroke-width: 2.25;
+}
+
+.core {
+  fill: var(--ink);
+}
+
+.strike {
+  stroke: var(--danger);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.issued .ring,
+.match .ring {
+  stroke: var(--accent);
+}
+
+.pending .ring {
+  stroke: var(--n-4);
+  stroke-dasharray: 2.4 2.2;
+}
+
+.revoked .ring,
+.mismatch .ring {
+  stroke: var(--danger);
+}
+
+.idle .ring {
+  stroke: var(--n-3);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--t-sm);
+  font-weight: 560;
+  white-space: nowrap;
+}
+
+.text-pending {
+  color: var(--ink-3);
+}
+
+.text-revoked,
+.text-mismatch {
+  color: var(--danger);
+}
