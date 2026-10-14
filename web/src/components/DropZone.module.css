@@ -1,0 +1,88 @@
+.zone {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "icon copy"
+    "icon pick";
+  column-gap: var(--s-4);
+  row-gap: var(--s-3);
+  align-items: start;
+  padding: var(--s-5);
+  border: 1px dashed var(--n-3);
+  border-radius: var(--r-md);
+  background: var(--n-0);
+  transition:
+    border-color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.zone[data-over] {
+  border-color: var(--ink);
+  border-style: solid;
+  background: var(--white);
+}
+
+.zone[data-busy] {
+  opacity: 0.6;
+}
+
+.zone[data-compact] {
+  padding: var(--s-4);
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "icon copy pick";
+  align-items: center;
+}
+
+.icon {
+  grid-area: icon;
+  color: var(--ink-3);
+  margin-top: 0.1rem;
+}
+
+.copy {
+  grid-area: copy;
+  min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.title {
+  font-weight: 560;
+  overflow-wrap: anywhere;
+}
+
+.hint {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.rejected {
+  font-size: var(--t-sm);
+  color: var(--danger);
+}
+
+.pick {
+  grid-area: pick;
+  justify-self: start;
+  min-height: 2.25rem;
+  padding: 0 0.85rem;
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  font-size: var(--t-sm);
+  font-weight: 560;
+  transition: border-color 160ms var(--ease-out);
+}
+
+.pick:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+@media (max-width: 30rem) {
+  .zone[data-compact] {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon copy"
+      "icon pick";
+  }
+}
