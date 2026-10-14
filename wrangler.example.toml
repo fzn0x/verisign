@@ -13,7 +13,7 @@ routes = [
 ]
 
 # Wrangler only compiles the Go Worker; the web app is built beforehand by
-# `pnpm dev` / `pnpm deploy`, because Wrangler indexes the assets directory
+# `pnpm dev` / `pnpm run deploy`, because Wrangler indexes the assets directory
 # before running this command.
 [build]
 command = "node scripts/build.mjs --worker"

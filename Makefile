@@ -25,4 +25,4 @@ migrate-remote:
 	pnpm db:migrate:remote
 
 deploy:
-	pnpm deploy
+	pnpm run deploy

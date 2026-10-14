@@ -49,7 +49,7 @@ pnpm db:migrate:remote
 # Set the owner password (at least 12 characters).
 pnpm exec wrangler secret put OWNER_PASSWORD
 
-pnpm deploy
+pnpm run deploy
 ```
 
 `wrangler.toml` is ignored by git because it names your database and domain. In it:
