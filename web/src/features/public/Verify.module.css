@@ -1,0 +1,437 @@
+.page {
+  width: 100%;
+  max-width: var(--content);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Mobile order: claim, record, check, then the explanation. */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "head"
+    "fields"
+    "aside"
+    "proves";
+  gap: var(--s-8);
+}
+
+.head {
+  grid-area: head;
+  display: grid;
+  gap: var(--s-5);
+}
+
+.fieldsPanel {
+  grid-area: fields;
+}
+
+.aside {
+  grid-area: aside;
+}
+
+.proves {
+  grid-area: proves;
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas:
+      "head aside"
+      "fields aside"
+      "proves aside";
+    grid-template-rows: auto auto 1fr;
+    column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    row-gap: var(--s-10);
+  }
+
+  .aside {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+  }
+}
+
+/* Claim */
+.statusHead {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--t-2xl);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+.status svg {
+  width: 0.72em;
+  height: 0.72em;
+}
+
+.status[data-status="pending"] {
+  color: var(--ink-2);
+}
+
+.docTitle {
+  font-size: var(--t-lg);
+  color: var(--ink-2);
+  max-width: 38ch;
+}
+
+/* Proof row: the evidence for the sentence above it. */
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.proof li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.proof svg {
+  color: var(--ink-3);
+  flex: none;
+}
+
+.proof strong {
+  font-weight: 560;
+  color: var(--ink);
+}
+
+.revocation {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--white));
+  border-radius: var(--r-md);
+  background: var(--danger-soft);
+  color: #5c120c;
+}
+
+.revocationTitle {
+  font-weight: 650;
+  color: var(--danger);
+}
+
+.revocationNote {
+  font-size: var(--t-sm);
+}
+
+/* Record fields */
+.fieldsPanel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+}
+
+.fields {
+  display: grid;
+}
+
+.fields > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 2fr) 5fr;
+  gap: var(--s-1) var(--s-6);
+  padding: var(--s-4) var(--s-5);
+  border-top: 1px solid var(--line);
+}
+
+.fields > div:first-child {
+  border-top: 0;
+}
+
+.fields dt {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.fields dd {
+  min-width: 0;
+}
+
+.linkRow dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+  font-size: var(--t-sm);
+}
+
+.break {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 34rem) {
+  .fields > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* What this proves: claim beside proof, no cards. */
+.sectionTitle {
+  font-size: var(--t-lg);
+  margin-bottom: var(--s-4);
+}
+
+.claims {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.claim {
+  display: grid;
+  gap: var(--s-1) var(--s-8);
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: var(--t-sm);
+}
+
+.claimHead {
+  font-size: var(--t-md);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (min-width: 48rem) {
+  .claim {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: baseline;
+  }
+}
+
+/* Integrity panel */
+.panel {
+  display: grid;
+  gap: var(--s-5);
+  padding: var(--s-6);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-panel);
+}
+
+@media (max-width: 30rem) {
+  .panel {
+    padding: var(--s-5) var(--s-4);
+  }
+}
+
+.panelHead {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.panelTitle {
+  font-size: var(--t-xl);
+}
+
+.panelLead {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+}
+
+.notice {
+  padding: var(--s-4);
+  border: 1px dashed var(--n-3);
+  border-radius: var(--r-md);
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--t-xs);
+  color: var(--ink-3);
+}
+
+.or::before,
+.or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.pasteForm {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.inlineError {
+  font-size: var(--t-sm);
+  color: var(--danger);
+}
+
+.result {
+  display: grid;
+  gap: var(--s-4);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  animation: reveal 360ms var(--ease-out) both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+}
+
+.checking {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.statement {
+  display: grid;
+  gap: var(--s-2);
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+}
+
+.statement > span {
+  font-size: var(--t-md);
+}
+
+.fileName {
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.when {
+  color: var(--ink-3);
+}
+
+.howto {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+}
+
+.howto summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  cursor: pointer;
+  list-style: none;
+  font-weight: 540;
+  color: var(--ink-2);
+  border-radius: var(--r-sm);
+}
+
+.howto summary::-webkit-details-marker {
+  display: none;
+}
+
+.howto summary svg {
+  transition: transform 200ms var(--ease-out);
+}
+
+.howto[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.commands {
+  display: grid;
+  gap: var(--s-1);
+  margin-top: var(--s-3);
+}
+
+.commands dt {
+  margin-top: var(--s-2);
+  font-size: var(--t-xs);
+  color: var(--ink-3);
+}
+
+.commands code {
+  display: block;
+  padding: var(--s-2) var(--s-3);
+  background: var(--n-1);
+  border-radius: var(--r-sm);
+  font-size: var(--t-xs);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.howtoNote {
+  margin-top: var(--s-3);
+  font-size: var(--t-xs);
+  color: var(--ink-3);
+}
+
+/* Messages and loading */
+.message {
+  display: grid;
+  gap: var(--s-4);
+  max-width: 40rem;
+  color: var(--ink-2);
+}
+
+.messageTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--t-2xl);
+  color: var(--ink);
+}
+
+.textButton {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 560;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.bone {
+  border-radius: var(--r-md);
+  background: linear-gradient(90deg, var(--n-1) 0%, var(--n-0) 50%, var(--n-1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.boneTitle {
+  height: 2.6rem;
+  width: min(28rem, 85%);
+}
+
+.boneLine {
+  height: 1.1rem;
+  width: min(22rem, 70%);
+}
+
+.bonePanel {
+  height: 22rem;
+}
+
+.boneAside {
+  height: 26rem;
+  border-radius: var(--r-lg);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
