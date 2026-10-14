@@ -162,6 +162,24 @@ function RecordFields({ doc }: { doc: PublicDocument }) {
   );
 }
 
+/** A URL that prefers to wrap after the scheme and the host, never inside the host. */
+function BreakableUrl({ url }: { url: string }) {
+  try {
+    const u = new URL(url);
+    return (
+      <>
+        {u.protocol}//
+        <wbr />
+        <span style={{ whiteSpace: "nowrap" }}>{u.host}</span>
+        <wbr />
+        {u.pathname}
+      </>
+    );
+  } catch {
+    return <>{url}</>;
+  }
+}
+
 /** The file facts and link, which follow the integrity check on phones. */
 function RecordLink({ doc }: { doc: PublicDocument }) {
   return (
@@ -176,7 +194,9 @@ function RecordLink({ doc }: { doc: PublicDocument }) {
         <div className={styles.linkRow}>
           <dt>Verification link</dt>
           <dd>
-            <span className={`mono ${styles.break}`}>{doc.verifyUrl}</span>
+            <span className={`mono ${styles.break}`}>
+              <BreakableUrl url={doc.verifyUrl} />
+            </span>
             <CopyButton value={doc.verifyUrl} label="Copy link" copiedMessage="Verification link copied" />
           </dd>
         </div>

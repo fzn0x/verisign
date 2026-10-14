@@ -5,14 +5,14 @@
   padding-inline: var(--gutter);
 }
 
-/* Mobile order: claim, record, check, file facts, then the explanation. */
+/* Phone order: the claim and its proof, then the check, then the record. */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "head"
-    "fields"
     "aside"
+    "fields"
     "more"
     "proves";
   gap: var(--s-6);
@@ -102,7 +102,10 @@
   .status {
     font-size: var(--t-3xl);
   }
+}
 
+/* Hang the mark only where the gutter is wide enough to hold it. */
+@media (min-width: 84rem) {
   .status svg {
     margin-left: -1.1em;
   }
@@ -229,6 +232,10 @@
   .fields dt {
     font-size: var(--t-xs);
     padding-top: 0.15em;
+  }
+
+  .fields > .linkRow {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
